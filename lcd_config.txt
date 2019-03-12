@@ -1,0 +1,132 @@
+//----------------------------------------------
+// LcdBee 
+//
+// LCD HARDWARE CONFIGURATION FILE
+//----------------------------------------------
+
+//------------------------------------------
+// TODO: build a Arduino 2009/Uno/Mega/ChipKit pin name/bit number correspondence table
+//       to easily setup the configuration pins
+//------------------------------------------
+
+#if defined(__AVR__)
+//==================================================================
+// Arduino (AVR) Configuration
+//==================================================================
+#define WR_SFR 	PORTC
+#define WR_BIT	4
+
+#define CS_IS_NOT_USED			// if unused, you must connect it to ground for the module to work
+#define CS_SFR PORTC
+#define CS_BIT 3
+
+#define RS_SFR	PORTC
+#define RS_BIT	5
+
+//#define RD_IS_NOT_USED		// if unused, there will be no "getPixel()" functionality and alpha blending
+#define RD_SFR	PORTC
+#define RD_BIT	3
+
+//#define RST_IS_NOT_USED		// if unused, you must perform a reset cycle 
+#define RST_SFR	PORTC
+#define RST_BIT	2
+
+//==================================================================
+
+#elif defined(__PIC32MX__)
+//==================================================================
+// ChipKit (Pic32) Configuration
+//==================================================================
+
+#define WR_SFR 	PORTF      
+#define WR_BIT	4
+
+//#define CS_IS_NOT_USED			// if unused, you must connect it to ground for the module to work
+#define CS_SFR	PORTF
+#define CS_BIT	5
+
+#define RS_SFR	PORTF
+#define RS_BIT	6
+
+//#define RST_IS_NOT_USED		// if unused, you must perform a reset cycle 
+#define RST_SFR	PORTB
+#define RST_BIT	1
+
+//#define RD_IS_NOT_USED		// if unused, there will be no "getPixel()" functionality and alpha blending
+#define RD_SFR	PORTG
+#define RD_BIT	8
+
+//      +-------------------------------------------------------------+
+//      |  ChipKit Uno32 Pin mappings                                 |
+//      |-------------------------------------------------------------|
+//      |  PIN# PORT,Bit#  |   PIN# Port:Bit# |   PIN# PORT,Bit#      |
+//      |  ----------------|------------------|---------------------  |
+//      |   0   PORTF 2    |   26  PORTE 0    |   14/A0   PORTB 2	  |
+//      |   1   PORTF 3    |   27  PORTE 1    |   15/A1   PORTB 4	  |
+//      |   2   PORTD 8    |   28  PORTE 2    |   16/A2   PORTB 8	  |
+//      |   3   PORTD 0    |   29  PORTE 3    |   17/A3   PORTB 10    |
+//      |   4   PORTF 1    |   30  PORTE 4    |   18/A4   PORTB 12    |
+//      |   5   PORTD 1    |   31  PORTE 5    |   19/A5   PORTB 14    |
+//      |   6   PORTD 2    |   32  PORTE 6    |   20/A6   PORTB 3	  |
+//      |   7   PORTD 9    |   33  PORTE 7    |   21/A7   PORTB 5	  |
+//      |                  |                  |   22/A8   PORTB 9	  |
+//      |   8   PORTD 10   |   34  PORTD 5    |   23/A9   PORTB 11    |
+//      |   9   PORTD 3    |   35  PORTD 11   |   24/A10  PORTB 13    |
+//      |  10   PORTD 4    |   36  PORTD 6    |   25/A11  PORTB 15    |
+//      |  11   PORTG 8    |   37  PORTD 7	                          |
+//      |  12   PORTG 7    |   38  PORTF 6	                          |
+//      |  13   PORTG 6    |   39  PORTF 4	                          |
+//      |                      40  PORTF 5	                          |
+//      |                      41  PORTB 1	                          |
+//      |                      42  PORTB 0	                          |
+//      |                      43  PORTF 0	                          |
+//      +-------------------------------------------------------------+      
+
+//==================================================================
+#endif
+
+
+//---------------------------------------------------------------------------
+// Orientation. 
+// uncomment one only.
+
+//#define LCDBEE_ORIENTATION_DYNAMIC		// support for rotating the display "live", but slower and takes a weebit more program space
+//#define LCDBEE_ORIENTATION_PORTRAIT
+#define LCDBEE_ORIENTATION_LANDSCAPE
+//#define LCDBEE_ORIENTATION_PORTRAIT2		// flip-down portrait // unsupported for now
+//#define LCDBEE_ORIENTATION_LANDSCAPE2		// horizontally flipped landscape // unsupported for now
+
+//---------------------------------------------------------------------------
+// uncomment one to pick your controller
+
+#define LCDBEE_ILI9325
+//#define LCDBEE_ILI9327			// unsupported
+//#define LCDBEE_HX8347A			// unsupported
+//#define LCDBEE_SSD1289			// unsupported
+
+//---------------------------------------------------------------------------
+// LCD native size. This is at the "natural" orientation. (Note: ITDB02 are portrait devices)
+
+#define LCDBEE_LCD_WIDTH	240
+#define LCDBEE_LCD_HEIGHT	320  // QVGA = 320, WQVGA = 400 
+
+//---------------------------------------------------------------------------
+// uncomment one only
+
+#define LCDBEE_16_BIT_BUS
+//#define LCDBEE_8_BIT_BUS		// unsupported for now
+
+//---------------------------------------------------------------------------
+// uncomment one only
+
+#define LCDBEE_16_BIT_COLOR		 // 565
+// #define LCDBEE_18_BIT_COLOR   // slower/higher quality "666" unsupported
+
+//---------------------------------------------------------------------------
+// uncomment to enable
+
+//#define LCDBEE_INTERNAL_LCD_BUFFER	// unsupported: this (would) eat a whopping LCDBEE_WIDTH*LCDBEE_HEIGHT*2 bytes 
+										// RAM. It is to avoid the RD pin connection for reading pixel data and 
+										// to enhance alpha-blending speed (for balancing with a slowing "writing" speed).
+
+//---------------------------------------------------------------------------
